@@ -1,1 +1,21 @@
-<p>contribute works!</p>
+<h3>Ajouter une contribution</h3>
+
+<h4>Questions</h4>
+
+<textarea cols="150" rows="10"></textarea>
+
+<h4>Réponses</h4>
+
+
+<div *ngFor="let answer of answers; let i = index">
+  <div>Réponse {{ i + 1 }} : {{ answer.title }}</div>
+  <div><input type="text" size="50" value=""/></div>
+  <div><a (click)="upAnswer(i)">monter</a> | <a (click)="downAnswer(i)">descendre</a> | <a (click)="deleteAnswer(i)">supprimer</a></div>
+</div>
+
+
+<div>
+  <div>Ajouter une réponse : </div>
+  <div><input type="text" size="50" [(ngModel)]="newAnswer" /></div>
+  <div><a  (click)="validate()">Valider</a></div>
+</div>

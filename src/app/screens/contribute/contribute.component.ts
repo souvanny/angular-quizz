@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-contribute',
@@ -12,20 +13,42 @@ export class ContributeComponent implements OnInit {
 
   ];
 
-  newAnswer: String = "koko";
+  question: String = "";
+  newAnswer: String = "";
+  typeChoices: String = "1";
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit() {
 
 
   }
 
-  public validate() {
+  public validateQuizz() {
 
-    console.log("validate...");
+    console.log("validateQuizz...");
+    console.log(this.question);
+    console.log(this.answers);
+
+    this.http.post<any>('http://localhost:8080/api/quizz', { question: this.question, answers: this.answers }).subscribe(data => {
+        console.log("Post done");
+    })
+
+
+
+  }
+
+  public addAnswer() {
+
+    console.log("addAnswer...");
+
+    if (this.newAnswer.trim() == "") {
+      return;
+    }
+
     console.log(this.newAnswer);
-    this.answers.push({ index: this.answers.length, title: this.newAnswer })
+    this.answers.push({ index: this.answers.length, title: this.newAnswer });
+    this.newAnswer = "";
 
   }
 

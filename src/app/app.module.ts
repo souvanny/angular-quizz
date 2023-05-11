@@ -10,6 +10,7 @@ import { MyContributesComponent } from './screens/my-contributes/my-contributes.
 import { AllContributesComponent } from './screens/all-contributes/all-contributes.component';
 import { AccountComponent } from './screens/account/account.component';
 import { AccountEditComponent } from './screens/account-edit/account-edit.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AccountEditComponent } from './screens/account-edit/account-edit.compon
     FormsModule,
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     RouterModule.forRoot([
       { path: 'all-contributes', component: AllContributesComponent },
       { path: 'my-contributes', component: MyContributesComponent },

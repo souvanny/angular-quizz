@@ -2,20 +2,43 @@
 
 <h4>Questions</h4>
 
-<textarea cols="150" rows="10"></textarea>
+<div class="type-choices">
+  <div>Choix unique <input type="radio" [value]="'1'" [(ngModel)]="typeChoices" /></div>
+  <div>Choix multiples <input type="radio" [value]="'2'" [(ngModel)]="typeChoices" /></div>
+</div>
+<div>
+  Question
+</div>
+<div>
+  <textarea cols="120" rows="7" [(ngModel)]="question"></textarea>
+</div>
 
 <h4>Réponses</h4>
 
 
-<div *ngFor="let answer of answers; let i = index">
+<div *ngFor="let answer of answers; let i = index" class="answer">
   <div>Réponse {{ i + 1 }} : {{ answer.title }}</div>
-  <div><input type="text" size="50" value=""/></div>
-  <div><a (click)="upAnswer(i)">monter</a> | <a (click)="downAnswer(i)">descendre</a> | <a (click)="deleteAnswer(i)">supprimer</a></div>
+  <div>
+    Bonne réponse : <input type="checkbox" value="1" />
+    |
+    <button (click)="upAnswer(i)">monter</button>
+    |
+    <button (click)="downAnswer(i)">descendre</button>
+    |
+    <button (click)="deleteAnswer(i)">supprimer</button>
+  </div>
 </div>
 
 
-<div>
-  <div>Ajouter une réponse : </div>
+<div class="new-answer">
   <div><input type="text" size="50" [(ngModel)]="newAnswer" /></div>
-  <div><a  (click)="validate()">Valider</a></div>
+  <div>
+    <button (click)="addAnswer()">Ajouter la réponse</button>
+  </div>
 </div>
+
+
+<div class="btn-validate-quizz">
+  <button (click)="validateQuizz()">Valider le quizz</button>
+</div>
+

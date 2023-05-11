@@ -9,13 +9,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ContributeComponent implements OnInit {
 
-  answers:  { index: number, title: String }[] = [
+  answers:  { index: number, isCorrect: number, title: String }[] = [
 
   ];
 
   question: String = "";
   newAnswer: String = "";
-  typeChoices: String = "1";
+  typeChoice: String = "1";
 
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
@@ -29,12 +29,20 @@ export class ContributeComponent implements OnInit {
     console.log("validateQuizz...");
     console.log(this.question);
     console.log(this.answers);
+    console.log("typeChoice : ", this.typeChoice);
 
-    this.http.post<any>('http://localhost:8080/api/quizz', { question: this.question, answers: this.answers }).subscribe(data => {
+    this.http.post<any>('http://localhost:8080/api/quizz',
+      {
+          question: this.question,
+          typeChoice: this.typeChoice,
+          answers: this.answers,
+        }).subscribe(data => {
         console.log("Post done");
+
+        this.question = "";
+        this.typeChoice = "1";
+        this.answers = [];
     })
-
-
 
   }
 
@@ -47,7 +55,7 @@ export class ContributeComponent implements OnInit {
     }
 
     console.log(this.newAnswer);
-    this.answers.push({ index: this.answers.length, title: this.newAnswer });
+    this.answers.push({ index: this.answers.length, isCorrect: 0, title: this.newAnswer });
     this.newAnswer = "";
 
   }
@@ -88,6 +96,15 @@ export class ContributeComponent implements OnInit {
   public deleteAnswer(index: number) {
 
     this.answers = this.answers.filter(item => item['index'] !== index);
+  }
+
+  public changeIsCorrect(indexOfArray: number) {
+
+    console.log("changeIsCorrect ===", indexOfArray);
+    console.log(this.answers[indexOfArray]);
+
+    this.answers[indexOfArray]["isCorrect"] = this.answers[indexOfArray]["isCorrect"] == 1 ? 0 : 1;
+
   }
 
 }

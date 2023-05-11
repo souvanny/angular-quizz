@@ -3,8 +3,8 @@
 <h4>Questions</h4>
 
 <div class="type-choices">
-  <div>Choix unique <input type="radio" [value]="'1'" [(ngModel)]="typeChoices" /></div>
-  <div>Choix multiples <input type="radio" [value]="'2'" [(ngModel)]="typeChoices" /></div>
+  <div>Choix unique <input type="radio" [value]="'1'" [(ngModel)]="typeChoice" /></div>
+  <div>Choix multiples <input type="radio" [value]="'2'" [(ngModel)]="typeChoice" /></div>
 </div>
 <div>
   Question
@@ -19,7 +19,7 @@
 <div *ngFor="let answer of answers; let i = index" class="answer">
   <div>Réponse {{ i + 1 }} : {{ answer.title }}</div>
   <div>
-    Bonne réponse : <input type="checkbox" value="1" />
+    Bonne réponse : <input type="checkbox" value="1" (click)="changeIsCorrect(i)" />
     |
     <button (click)="upAnswer(i)">monter</button>
     |

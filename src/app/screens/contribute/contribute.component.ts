@@ -9,13 +9,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ContributeComponent implements OnInit {
 
-  answers:  { index: number, isCorrect: number, title: String }[] = [
-
-  ];
+  answers:  { index: number, isCorrect: number, title: String }[] = [];
 
   question: String = "";
   newAnswer: String = "";
   typeChoice: String = "1";
+  hashtags: String = "";
 
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
